@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdelrahman Eldib — Portfolio</title>
+<meta name="description" content="Abdelrahman Eldib — Computer Engineering student at KTH with a background in leadership, security and service.">
+<style>
+  :root{
+    --bg:#0b1220;
+    --bg-soft:#101826;
+    --card:#141f30;
+    --border:rgba(148,163,184,0.16);
+    --text:#f1f5f9;
+    --text-dim:#94a3b8;
+    --accent:#2dd4bf;
+    --accent-2:#38bdf8;
+    --max-w:1040px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max-w);margin:0 auto;padding:0 24px;}
+
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,18,32,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .logo{font-weight:700;font-size:17px;letter-spacing:0.3px;}
+  .logo span{color:var(--accent);}
+  nav ul{list-style:none;display:flex;gap:28px;}
+  nav a{font-size:14.5px;color:var(--text-dim);text-decoration:none;transition:color .15s;}
+  nav a:hover{color:var(--text);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;}
+
+  section{padding:88px 0;}
+  .hero{
+    padding:130px 0 100px;
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 82% 15%, rgba(45,212,191,0.16), transparent 45%),
+      radial-gradient(circle at 10% 85%, rgba(56,189,248,0.10), transparent 40%);
+  }
+  .eyebrow{
+    color:var(--accent);
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  h1{
+    font-size:clamp(34px,5vw,54px);
+    font-weight:800;
+    line-height:1.15;
+    max-width:780px;
+  }
+  .hero p.lead{
+    margin-top:22px;
+    max-width:600px;
+    color:var(--text-dim);
+    font-size:18px;
+  }
+  .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:10px;
+    font-size:14.5px;font-weight:600;
+    text-decoration:none;
+    transition:transform .15s, opacity .15s;
+    border:1px solid transparent;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04141a;}
+  .btn-ghost{border-color:var(--border);color:var(--text);background:rgba(255,255,255,0.03);}
+
+  h2{
+    font-size:26px;font-weight:700;margin-bottom:8px;
+  }
+  .section-sub{color:var(--text-dim);font-size:15px;margin-bottom:40px;max-width:600px;}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:26px;
+  }
+
+  .about-card p{color:var(--text-dim);margin-bottom:14px;}
+  .about-card p:last-child{margin-bottom:0;}
+
+  .skill-group h3{font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:14px;font-weight:600;}
+  .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;}
+  .pill{
+    padding:8px 16px;border-radius:999px;
+    background:rgba(45,212,191,0.08);
+    border:1px solid rgba(45,212,191,0.25);
+    color:#a7f3ec;
+    font-size:13.5px;font-weight:500;
+  }
+  .pill.soft{
+    background:rgba(56,189,248,0.07);
+    border-color:rgba(56,189,248,0.22);
+    color:#bae6fd;
+  }
+
+  .project-card{display:flex;flex-direction:column;height:100%;}
+  .project-card .tag{
+    display:inline-block;align-self:flex-start;
+    font-size:11.5px;font-weight:700;letter-spacing:0.4px;text-transform:uppercase;
+    color:#04141a;background:var(--accent);
+    padding:4px 10px;border-radius:6px;margin-bottom:14px;
+  }
+  .project-card .tag.soon{background:transparent;color:var(--text-dim);border:1px dashed var(--border);}
+  .project-card h3{font-size:18px;margin-bottom:10px;}
+  .project-card p{color:var(--text-dim);font-size:14.5px;flex:1;}
+  .project-card .stack{margin-top:16px;font-size:12.5px;color:var(--accent-2);font-weight:600;}
+  .project-card .links{margin-top:16px;}
+  .project-card .links a{font-size:13.5px;color:var(--text);text-decoration:underline;text-decoration-color:var(--border);}
+
+  .timeline{border-left:2px solid var(--border);padding-left:28px;display:flex;flex-direction:column;gap:34px;}
+  .t-item{position:relative;}
+  .t-item::before{
+    content:"";position:absolute;left:-33.5px;top:4px;
+    width:11px;height:11px;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 0 4px rgba(45,212,191,0.15);
+  }
+  .t-item .t-date{font-size:12.5px;color:var(--accent);font-weight:600;letter-spacing:0.3px;}
+  .t-item h3{font-size:16.5px;margin:4px 0 6px;}
+  .t-item .t-org{font-size:14px;color:var(--text-dim);margin-bottom:8px;}
+  .t-item p.desc{color:var(--text-dim);font-size:14.5px;}
+
+  .cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  .cert-item{
+    display:flex;align-items:flex-start;gap:12px;
+    background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;
+  }
+  .cert-item .dot{width:8px;height:8px;border-radius:50%;background:var(--accent-2);margin-top:6px;flex-shrink:0;}
+  .cert-item strong{display:block;font-size:14.5px;}
+  .cert-item span{font-size:13px;color:var(--text-dim);}
+
+  footer{
+    border-top:1px solid var(--border);
+    padding:60px 0 40px;
+    text-align:center;
+  }
+  footer h2{font-size:24px;}
+  .contact-row{
+    margin-top:26px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
+  }
+  .fine{margin-top:50px;color:var(--text-dim);font-size:13px;}
+
+  @media (max-width:760px){
+    nav{display:none;}
+    .nav-toggle{display:block;}
+    .grid-2, .grid-3, .cert-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Abdelrahman<span>.</span>Eldib</div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Computer Engineering Student · KTH</div>
+    <h1>Building technical solutions with a leader's sense of ownership.</h1>
+    <p class="lead">I'm Abdelrahman Eldib. Alongside my Computer Engineering studies, I bring several years of experience in security work, leadership and service — now I want to channel that same sense of responsibility into technical projects and a career in tech.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#projects">See my projects</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About me</h2>
+    <p class="section-sub">A quick look at who I am and where I'm headed.</p>
+    <div class="card about-card">
+      <p>I'm studying Computer Engineering at KTH Royal Institute of Technology, actively building my programming skills while already carrying a broad professional background: as a Security Officer at Securitas, a Shift Supervisor at Max Burgers, and Chairperson of the youth organization Fler Unga.</p>
+      <p>Those roles taught me to take ownership, stay level-headed under pressure, and lead others toward a shared goal — qualities I now want to pair with technical skill. I'm looking for opportunities in IT, administration and technical support, where precision, structured thinking and a genuine drive to learn make a real difference.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:var(--bg-soft);">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <p class="section-sub">Technical skills I'm actively building, alongside strengths developed over several years of work experience.</p>
+
+    <div class="skill-group">
+      <h3>Programming &amp; Technology</h3>
+      <div class="pill-row">
+        <span class="pill">Python</span>
+        <span class="pill">C</span>
+        <span class="pill">Java</span>
+        <span class="pill">C++</span>
+        <span class="pill">HTML</span>
+        <span class="pill">CSS</span>
+        <span class="pill">JavaScript</span>
+        <span class="pill">Git &amp; GitHub</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h3>Leadership &amp; Work Experience</h3>
+      <div class="pill-row">
+        <span class="pill soft">Leadership</span>
+        <span class="pill soft">Crisis Management</span>
+        <span class="pill soft">Customer Service</span>
+        <span class="pill soft">Risk Assessment</span>
+        <span class="pill soft">Project Coordination</span>
+        <span class="pill soft">Structure &amp; Attention to Detail</span>
+        <span class="pill soft">Arabic / Swedish / English</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="section-sub">My code projects — more to come as my studies progress.</p>
+    <div class="grid-3">
+      <div class="card project-card">
+        <span class="tag">C</span>
+        <h3>Bank Program</h3>
+        <p>A terminal-based program for managing bank accounts and transactions, built as coursework at KTH.</p>
+        <div class="stack">C · File handling</div>
+        <div class="links"><a href="https://github.com/abdelrahman-eldib/bankprogram" target="_blank" rel="noopener">View on GitHub →</a></div>
+      </div>
+      <div class="card project-card">
+        <span class="tag soon">Coming soon</span>
+        <h3>Next project</h3>
+        <p>More projects in Python and web development are in the works as my studies continue.</p>
+      </div>
+      <div class="card project-card">
+        <span class="tag soon">Coming soon</span>
+        <h3>This portfolio</h3>
+        <p>This site itself is a living project, built and improved continuously.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" style="background:var(--bg-soft);">
+  <div class="wrap">
+    <h2>Experience &amp; Leadership</h2>
+    <p class="section-sub">A selection of my background in security, service and volunteer work.</p>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-date">2025 — Present</div>
+        <h3>Security Officer</h3>
+        <div class="t-org">Securitas Sverige AB, Stockholm</div>
+        <p class="desc">Securing protected sites, conducting security checks and risk assessments in line with applicable regulations and procedures.</p>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2023 — Present</div>
+        <h3>Chairperson</h3>
+        <div class="t-org">Fler Unga</div>
+        <p class="desc">Leads the organization's strategic work, coordinates projects and represents youth in a variety of settings.</p>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2024 — 2026</div>
+        <h3>Shift Supervisor</h3>
+        <div class="t-org">Max Burgers AB, Stockholm</div>
+        <p class="desc">Led restaurant operations during shifts, coordinated staff and service flow, and owned safety and guest experience during evening and night shifts.</p>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2023 — 2024</div>
+        <h3>Ground Combat Soldier</h3>
+        <div class="t-org">Ledningsregementet, Enköping</div>
+        <p class="desc">Trained in tactical operations, security protocols and risk assessment. Developed leadership and rapid decision-making under pressure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education &amp; Certifications</h2>
+    <p class="section-sub">Formal education and certifications.</p>
+    <div class="cert-grid">
+      <div class="cert-item"><div class="dot"></div><div><strong>B.Eng. Computer Engineering</strong><span>KTH Royal Institute of Technology, 2025–present</span></div></div>
+      <div class="cert-item"><div class="dot"></div><div><strong>Pharmacy Technician Program</strong><span>TUC Vocational College, 2026–present</span></div></div>
+      <div class="cert-item"><div class="dot"></div><div><strong>Security Officer Training</strong><span>Swedish Armed Forces, 2023–2028</span></div></div>
+      <div class="cert-item"><div class="dot"></div><div><strong>High School Diploma</strong><span>Internationella Engelska Gymnasiet, 2020–2023</span></div></div>
+      <div class="cert-item"><div class="dot"></div><div><strong>Forklift Licenses A, B, D</strong><span>Certified forklift operator</span></div></div>
+      <div class="cert-item"><div class="dot"></div><div><strong>Driving Licenses AM, B</strong><span>Full driving license</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p class="section-sub" style="margin:10px auto 0;">Open to part-time roles and internships in IT, administration and technical support.</p>
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:aeldib.eng@gmail.com">Email</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/abdelrahmaneldib/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/abdelrahman-eldib" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="fine">© <span id="year"></span> Abdelrahman Eldib · Built with HTML, CSS &amp; JavaScript</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
