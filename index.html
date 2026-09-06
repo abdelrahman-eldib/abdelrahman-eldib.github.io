@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abdelrahman Eldib — Portfolio</title>
 <meta name="description" content="Abdelrahman Eldib — Computer Engineering student at KTH with a background in leadership, security and service.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1220'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='26' fill='%232dd4bf' text-anchor='middle'%3EAE%3C/text%3E%3C/svg%3E">
 <style>
   :root{
     --bg:#0b1220;
@@ -24,6 +25,7 @@
     color:var(--text);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.6;
+    overflow-x:hidden;
   }
   a{color:inherit;}
   .wrap{max-width:var(--max-w);margin:0 auto;padding:0 24px;}
@@ -40,16 +42,44 @@
   nav ul{list-style:none;display:flex;gap:28px;}
   nav a{font-size:14.5px;color:var(--text-dim);text-decoration:none;transition:color .15s;}
   nav a:hover{color:var(--text);}
-  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;}
 
   section{padding:88px 0;}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
   .hero{
-    padding:130px 0 100px;
+    padding:100px 0 100px;
     position:relative;
     overflow:hidden;
     background:
       radial-gradient(circle at 82% 15%, rgba(45,212,191,0.16), transparent 45%),
       radial-gradient(circle at 10% 85%, rgba(56,189,248,0.10), transparent 40%);
+  }
+  .hero .wrap{display:flex;align-items:center;gap:56px;}
+  .hero-text{flex:1;min-width:0;}
+  .hero-avatar-col{flex-shrink:0;position:relative;width:230px;height:230px;}
+  .avatar-blob{
+    position:absolute;inset:-22px;
+    border-radius:38% 62% 63% 37% / 41% 44% 56% 59%;
+    background:linear-gradient(135deg, rgba(45,212,191,0.35), rgba(56,189,248,0.2));
+    animation:blobmove 9s ease-in-out infinite;
+    filter:blur(2px);
+  }
+  @keyframes blobmove{
+    0%,100%{border-radius:38% 62% 63% 37% / 41% 44% 56% 59%;}
+    50%{border-radius:58% 42% 38% 62% / 55% 40% 60% 45%;}
+  }
+  .avatar-ring{
+    position:absolute;inset:0;
+    border-radius:50%;
+    padding:5px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  }
+  .avatar-ring img{
+    width:100%;height:100%;object-fit:cover;
+    border-radius:50%;
+    display:block;
+    border:4px solid var(--bg);
   }
   .eyebrow{
     color:var(--accent);
@@ -60,14 +90,13 @@
     margin-bottom:18px;
   }
   h1{
-    font-size:clamp(34px,5vw,54px);
+    font-size:clamp(32px,4.6vw,50px);
     font-weight:800;
     line-height:1.15;
-    max-width:780px;
   }
   .hero p.lead{
     margin-top:22px;
-    max-width:600px;
+    max-width:560px;
     color:var(--text-dim);
     font-size:18px;
   }
@@ -77,12 +106,16 @@
     padding:12px 22px;border-radius:10px;
     font-size:14.5px;font-weight:600;
     text-decoration:none;
-    transition:transform .15s, opacity .15s;
+    transition:transform .15s, opacity .15s, box-shadow .15s;
     border:1px solid transparent;
   }
-  .btn:hover{transform:translateY(-2px);}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(45,212,191,0.15);}
   .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04141a;}
   .btn-ghost{border-color:var(--border);color:var(--text);background:rgba(255,255,255,0.03);}
+
+  .stat-row{margin-top:42px;display:flex;gap:36px;flex-wrap:wrap;}
+  .stat b{display:block;font-size:26px;font-weight:800;color:var(--text);}
+  .stat span{font-size:13px;color:var(--text-dim);}
 
   h2{
     font-size:26px;font-weight:700;margin-bottom:8px;
@@ -97,6 +130,7 @@
     border:1px solid var(--border);
     border-radius:14px;
     padding:26px;
+    transition:transform .2s ease, border-color .2s ease;
   }
 
   .about-card p{color:var(--text-dim);margin-bottom:14px;}
@@ -110,14 +144,18 @@
     border:1px solid rgba(45,212,191,0.25);
     color:#a7f3ec;
     font-size:13.5px;font-weight:500;
+    transition:transform .15s ease, background .15s ease;
   }
+  .pill:hover{transform:translateY(-2px);background:rgba(45,212,191,0.16);}
   .pill.soft{
     background:rgba(56,189,248,0.07);
     border-color:rgba(56,189,248,0.22);
     color:#bae6fd;
   }
+  .pill.soft:hover{background:rgba(56,189,248,0.15);}
 
   .project-card{display:flex;flex-direction:column;height:100%;}
+  .project-card:hover{transform:translateY(-4px);border-color:rgba(45,212,191,0.35);}
   .project-card .tag{
     display:inline-block;align-self:flex-start;
     font-size:11.5px;font-weight:700;letter-spacing:0.4px;text-transform:uppercase;
@@ -130,6 +168,17 @@
   .project-card .stack{margin-top:16px;font-size:12.5px;color:var(--accent-2);font-weight:600;}
   .project-card .links{margin-top:16px;}
   .project-card .links a{font-size:13.5px;color:var(--text);text-decoration:underline;text-decoration-color:var(--border);}
+
+  .vol-card{display:flex;gap:16px;align-items:flex-start;}
+  .vol-card .vol-icon{
+    flex-shrink:0;width:42px;height:42px;border-radius:11px;
+    background:rgba(45,212,191,0.1);border:1px solid rgba(45,212,191,0.25);
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+  }
+  .vol-card h3{font-size:15.5px;margin-bottom:4px;}
+  .vol-card .vol-org{font-size:12.5px;color:var(--accent);font-weight:600;margin-bottom:6px;}
+  .vol-card p{font-size:13.5px;color:var(--text-dim);}
+  .vol-card:hover{transform:translateY(-3px);border-color:rgba(56,189,248,0.3);}
 
   .timeline{border-left:2px solid var(--border);padding-left:28px;display:flex;flex-direction:column;gap:34px;}
   .t-item{position:relative;}
@@ -147,7 +196,9 @@
   .cert-item{
     display:flex;align-items:flex-start;gap:12px;
     background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;
+    transition:transform .2s ease, border-color .2s ease;
   }
+  .cert-item:hover{transform:translateY(-3px);border-color:rgba(56,189,248,0.3);}
   .cert-item .dot{width:8px;height:8px;border-radius:50%;background:var(--accent-2);margin-top:6px;flex-shrink:0;}
   .cert-item strong{display:block;font-size:14.5px;}
   .cert-item span{font-size:13px;color:var(--text-dim);}
@@ -165,8 +216,16 @@
 
   @media (max-width:760px){
     nav{display:none;}
-    .nav-toggle{display:block;}
+    .hero .wrap{flex-direction:column;text-align:center;}
+    .hero-text .stat-row, .hero-text .cta-row{justify-content:center;}
+    .hero-text p.lead{margin-left:auto;margin-right:auto;}
     .grid-2, .grid-3, .cert-grid{grid-template-columns:1fr;}
+    .hero-avatar-col{width:180px;height:180px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    .avatar-blob{animation:none;}
   }
 </style>
 </head>
@@ -180,6 +239,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#volunteering">Volunteering</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -189,17 +249,30 @@
 
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow">Computer Engineering Student · KTH</div>
-    <h1>Building technical solutions with a leader's sense of ownership.</h1>
-    <p class="lead">I'm Abdelrahman Eldib. Alongside my Computer Engineering studies, I bring several years of experience in security work, leadership and service — now I want to channel that same sense of responsibility into technical projects and a career in tech.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#projects">See my projects</a>
-      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    <div class="hero-text">
+      <div class="eyebrow">Computer Engineering Student · KTH</div>
+      <h1>Building technical solutions with a leader's sense of ownership.</h1>
+      <p class="lead">I'm Abdelrahman Eldib. Alongside my Computer Engineering studies, I bring several years of experience in security work, leadership and service — now I want to channel that same sense of responsibility into technical projects and a career in tech.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects">See my projects</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>3</b><span>Languages spoken</span></div>
+        <div class="stat"><b>5+</b><span>Years of work experience</span></div>
+        <div class="stat"><b>6</b><span>Certifications &amp; licenses</span></div>
+      </div>
+    </div>
+    <div class="hero-avatar-col">
+      <div class="avatar-blob"></div>
+      <div class="avatar-ring">
+        <img src="data:image/jpeg;base64,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" alt="Portrait of Abdelrahman Eldib">
+      </div>
     </div>
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="reveal">
   <div class="wrap">
     <h2>About me</h2>
     <p class="section-sub">A quick look at who I am and where I'm headed.</p>
@@ -210,7 +283,7 @@
   </div>
 </section>
 
-<section id="skills" style="background:var(--bg-soft);">
+<section id="skills" class="reveal" style="background:var(--bg-soft);">
   <div class="wrap">
     <h2>Skills</h2>
     <p class="section-sub">Technical skills I'm actively building, alongside strengths developed over several years of work experience.</p>
@@ -244,7 +317,7 @@
   </div>
 </section>
 
-<section id="projects">
+<section id="projects" class="reveal">
   <div class="wrap">
     <h2>Projects</h2>
     <p class="section-sub">My code projects — more to come as my studies progress.</p>
@@ -257,35 +330,72 @@
         <div class="links"><a href="https://github.com/abdelrahman-eldib/bankprogram" target="_blank" rel="noopener">View on GitHub →</a></div>
       </div>
       <div class="card project-card">
-        <span class="tag soon">Coming soon</span>
-        <h3>Next project</h3>
-        <p>More projects in Python and web development are in the works as my studies continue.</p>
+        <span class="tag">HTML/CSS/JS</span>
+        <h3>This Portfolio</h3>
+        <p>This site itself — designed and built from scratch, hosted on GitHub Pages, and improved continuously.</p>
+        <div class="stack">HTML · CSS · JavaScript</div>
+        <div class="links"><a href="https://github.com/abdelrahman-eldib/abdelrahman-eldib.github.io" target="_blank" rel="noopener">View source →</a></div>
       </div>
       <div class="card project-card">
         <span class="tag soon">Coming soon</span>
-        <h3>This portfolio</h3>
-        <p>This site itself is a living project, built and improved continuously.</p>
+        <h3>Next project</h3>
+        <p>More projects in Python and web development are in the works as my studies continue.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="experience" style="background:var(--bg-soft);">
+<section id="volunteering" class="reveal" style="background:var(--bg-soft);">
   <div class="wrap">
-    <h2>Experience &amp; Leadership</h2>
-    <p class="section-sub">A selection of my background in security, service and volunteer work.</p>
+    <h2>Volunteering &amp; Community Leadership</h2>
+    <p class="section-sub">Since 2018 I've been active in youth-focused non-profits — leadership, event planning, communication and media production.</p>
+    <div class="grid-2">
+      <div class="card vol-card">
+        <div class="vol-icon">🧭</div>
+        <div>
+          <h3>Chairperson</h3>
+          <div class="vol-org">Fler Unga · 2023–present</div>
+          <p>Leads the organization's strategic work, coordinates projects and represents youth in public settings.</p>
+        </div>
+      </div>
+      <div class="card vol-card">
+        <div class="vol-icon">🎓</div>
+        <div>
+          <h3>Vice Chairperson</h3>
+          <div class="vol-org">Stockholms Elevkårer · 2022–2023</div>
+          <p>Worked with the board to strengthen student councils across Stockholm and organized events like the student union gala.</p>
+        </div>
+      </div>
+      <div class="card vol-card">
+        <div class="vol-icon">🏛️</div>
+        <div>
+          <h3>Chairperson, Supervisory Board</h3>
+          <div class="vol-org">IEGS Student Union · 2022–2023</div>
+          <p>Oversaw and evaluated the student union's operations, ensuring compliance with its bylaws.</p>
+        </div>
+      </div>
+      <div class="card vol-card">
+        <div class="vol-icon">🎬</div>
+        <div>
+          <h3>Media Assistant</h3>
+          <div class="vol-org">Islamiska Förbundet / Stockholm Mosque · 2016–2022</div>
+          <p>Produced videos, graphics and posters, handling filming, editing and event promotion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="reveal">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <p class="section-sub">A selection of my background in security and service work.</p>
     <div class="timeline">
       <div class="t-item">
         <div class="t-date">2025 — Present</div>
         <h3>Security Officer</h3>
         <div class="t-org">Securitas Sverige AB, Stockholm</div>
         <p class="desc">Securing protected sites, conducting security checks and risk assessments in line with applicable regulations and procedures.</p>
-      </div>
-      <div class="t-item">
-        <div class="t-date">2023 — Present</div>
-        <h3>Chairperson</h3>
-        <div class="t-org">Fler Unga</div>
-        <p class="desc">Leads the organization's strategic work, coordinates projects and represents youth in a variety of settings.</p>
       </div>
       <div class="t-item">
         <div class="t-date">2024 — 2026</div>
@@ -299,14 +409,20 @@
         <div class="t-org">Ledningsregementet, Enköping</div>
         <p class="desc">Trained in tactical operations, security protocols and risk assessment. Developed leadership and rapid decision-making under pressure.</p>
       </div>
+      <div class="t-item">
+        <div class="t-date">2024</div>
+        <h3>Warehouse Consultant</h3>
+        <div class="t-org">Steelwrist, Märsta</div>
+        <p class="desc">Worked in inventory management and materials handling, keeping stock registered and well-organized for efficient access.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="education">
+<section id="education" class="reveal" style="background:var(--bg-soft);">
   <div class="wrap">
     <h2>Education &amp; Certifications</h2>
-    <p class="section-sub">Formal education and certifications.</p>
+    <p class="section-sub">Formal education, vocational training and certifications.</p>
     <div class="cert-grid">
       <div class="cert-item"><div class="dot"></div><div><strong>B.Eng. Computer Engineering</strong><span>KTH Royal Institute of Technology, 2025–present</span></div></div>
       <div class="cert-item"><div class="dot"></div><div><strong>Pharmacy Technician Program</strong><span>TUC Vocational College, 2026–present</span></div></div>
@@ -314,6 +430,8 @@
       <div class="cert-item"><div class="dot"></div><div><strong>High School Diploma</strong><span>Internationella Engelska Gymnasiet, 2020–2023</span></div></div>
       <div class="cert-item"><div class="dot"></div><div><strong>Forklift Licenses A, B, D</strong><span>Certified forklift operator</span></div></div>
       <div class="cert-item"><div class="dot"></div><div><strong>Driving Licenses AM, B</strong><span>Full driving license</span></div></div>
+      <div class="cert-item"><div class="dot"></div><div><strong>Peace &amp; Conflict Studies</strong><span>Uppsala University, 2023–2024</span></div></div>
+      <div class="cert-item"><div class="dot"></div><div><strong>Psychology</strong><span>Halmstad University, 2024</span></div></div>
     </div>
   </div>
 </section>
@@ -333,6 +451,19 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(function(el){
+    observer.observe(el);
+  });
 </script>
 
 </body>
