@@ -370,6 +370,41 @@
     .t-item.current::before{animation:none;}
     .scroll-cue span{animation:none;}
   }
+  .cert-groups{margin-top:16px;display:flex;flex-direction:column;gap:12px;}
+  .cert-group{padding:0;}
+  .cert-group summary{
+    list-style:none;cursor:pointer;
+    display:flex;align-items:center;gap:14px;
+    padding:18px 22px;
+  }
+  .cert-group summary::-webkit-details-marker{display:none;}
+  .cg-icon{
+    flex-shrink:0;width:38px;height:38px;border-radius:10px;
+    background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.25);
+    display:flex;align-items:center;justify-content:center;font-size:16px;
+  }
+  .cg-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;}
+  .cg-text strong{font-size:14.5px;font-weight:600;}
+  .cg-sub{font-size:12px;color:var(--text-dim);font-family:var(--font-mono);}
+  .chevron{flex-shrink:0;color:var(--text-dim);font-size:18px;transition:transform .2s ease;font-family:var(--font-mono);}
+  .cert-group[open] .chevron{transform:rotate(90deg);color:var(--accent);}
+  .cg-list{
+    padding:4px 22px 20px;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:2px 24px;
+    border-top:1px solid var(--border);
+    margin-top:2px;padding-top:14px;
+  }
+  .cg-item{
+    display:flex;justify-content:space-between;gap:10px;
+    padding:7px 0;font-size:13px;color:var(--text-dim);
+    border-bottom:1px dashed var(--border);
+  }
+  .cg-item span:first-child{color:var(--text);}
+  .cg-date{flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;color:var(--accent-2);}
+
+  @media (max-width:600px){
+    .cg-list{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
@@ -408,7 +443,7 @@
       <div class="stat-row">
         <div class="stat"><b><span class="counter" data-target="3">0</span></b><span>Languages spoken</span></div>
         <div class="stat"><b><span class="counter" data-target="8">0</span><span class="plus">+</span></b><span>Years of leadership &amp; work experience</span></div>
-        <div class="stat"><b><span class="counter" data-target="6">0</span></b><span>Certifications &amp; licenses</span></div>
+        <div class="stat"><b><span class="counter" data-target="40">0</span></b><span>Certifications &amp; licenses</span></div>
       </div>
     </div>
     <div class="hero-avatar-col">
@@ -616,20 +651,96 @@
       <span class="sec-num">06</span>
       <div>
         <h2>Education &amp; Certifications</h2>
-        <p class="section-sub">Formal education, vocational training and certifications.</p>
+        <p class="section-sub">Formal education, licenses, and 40+ completed certifications — degrees and licenses below, micro-credentials grouped by provider.</p>
       </div>
     </div>
     <div class="cert-grid">
       <div class="cert-item"><div class="dot"></div><div><strong>B.Eng. Computer Engineering</strong><span>KTH Royal Institute of Technology, 2025–present</span></div></div>
       <div class="cert-item"><div class="dot"></div><div><strong>Pharmacy Technician Program</strong><span>TUC Vocational College, 2026–present</span></div></div>
       <div class="cert-item"><div class="dot"></div><div><strong>Security Officer Training</strong><span>Swedish Armed Forces, 2023–2028</span></div></div>
-      <div class="cert-item"><div class="dot"></div><div><strong>High School Diploma</strong><span>Internationella Engelska Gymnasiet, 2020–2023</span></div></div>
+      <div class="cert-item"><div class="dot"></div><div><strong>High School Diploma</strong><span>Internationella Engelska Gymnasiet Södermalm, issued 2023-06-02</span></div></div>
       <div class="cert-item"><div class="dot"></div><div><strong>Forklift Licenses A, B, D</strong><span>Certified forklift operator</span></div></div>
       <div class="cert-item"><div class="dot"></div><div><strong>Driving Licenses AM, B</strong><span>Full driving license</span></div></div>
       <div class="cert-item"><div class="dot"></div><div><strong>Peace &amp; Conflict Studies</strong><span>Uppsala University, 2023–2024</span></div></div>
       <div class="cert-item"><div class="dot"></div><div><strong>Psychology</strong><span>Halmstad University, 2024</span></div></div>
     </div>
-    <p class="cert-note">list not final — a few more licenses &amp; certifications to be added soon</p>
+    <div class="cert-groups">
+      <details class="cert-group card">
+        <summary>
+          <span class="cg-icon">💼</span>
+          <span class="cg-text">
+            <strong>HP LIFE — 25 Business &amp; Tech Micro-Certifications</strong>
+            <span class="cg-sub">HP Foundation · completed Jul 14–24, 2025</span>
+          </span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="cg-list">
+          <div class="cg-item"><span>Starting a Small Business</span><span class="cg-date">Jul 14</span></div>
+          <div class="cg-item"><span>Effective Leadership</span><span class="cg-date">Jul 14</span></div>
+          <div class="cg-item"><span>Success Mindset</span><span class="cg-date">Jul 14</span></div>
+          <div class="cg-item"><span>AI for Beginners</span><span class="cg-date">Jul 14</span></div>
+          <div class="cg-item"><span>Resume Writing and Job Interviewing</span><span class="cg-date">Jul 15</span></div>
+          <div class="cg-item"><span>Data Science &amp; Analytics</span><span class="cg-date">Jul 15</span></div>
+          <div class="cg-item"><span>Effective Presentations</span><span class="cg-date">Jul 15</span></div>
+          <div class="cg-item"><span>Social Media Marketing</span><span class="cg-date">Jul 15</span></div>
+          <div class="cg-item"><span>Basics of Finance</span><span class="cg-date">Jul 15</span></div>
+          <div class="cg-item"><span>Selling Online</span><span class="cg-date">Jul 15</span></div>
+          <div class="cg-item"><span>Effective Business Websites</span><span class="cg-date">Jul 15</span></div>
+          <div class="cg-item"><span>Introduction to Cybersecurity Awareness</span><span class="cg-date">Jul 15</span></div>
+          <div class="cg-item"><span>Business Communications</span><span class="cg-date">Jul 16</span></div>
+          <div class="cg-item"><span>Cash Flow</span><span class="cg-date">Jul 16</span></div>
+          <div class="cg-item"><span>Agile Project Management</span><span class="cg-date">Jul 16</span></div>
+          <div class="cg-item"><span>Unique Value Proposition</span><span class="cg-date">Jul 16</span></div>
+          <div class="cg-item"><span>Presenting Data</span><span class="cg-date">Jul 16</span></div>
+          <div class="cg-item"><span>Customer Relationship Management</span><span class="cg-date">Jul 16</span></div>
+          <div class="cg-item"><span>Business Email</span><span class="cg-date">Jul 17</span></div>
+          <div class="cg-item"><span>Introduction to Digital Business Skills</span><span class="cg-date">Jul 17</span></div>
+          <div class="cg-item"><span>Design Thinking</span><span class="cg-date">Jul 17</span></div>
+          <div class="cg-item"><span>Your Target Audience</span><span class="cg-date">Jul 18</span></div>
+          <div class="cg-item"><span>Strategic Planning</span><span class="cg-date">Jul 18</span></div>
+          <div class="cg-item"><span>Inventory Management</span><span class="cg-date">Jul 18</span></div>
+          <div class="cg-item"><span>Profit and Loss</span><span class="cg-date">Jul 24</span></div>
+        </div>
+      </details>
+
+      <details class="cert-group card">
+        <summary>
+          <span class="cg-icon">🤖</span>
+          <span class="cg-text">
+            <strong>Sololearn — 8 Programming &amp; AI Certificates</strong>
+            <span class="cg-sub">completed July 2025</span>
+          </span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="cg-list">
+          <div class="cg-item"><span>Introduction to C</span><span class="cg-date">Jul 19</span></div>
+          <div class="cg-item"><span>Prompt Engineering</span></div>
+          <div class="cg-item"><span>Ethical AI Foundations</span></div>
+          <div class="cg-item"><span>Introduction to LLMs</span></div>
+          <div class="cg-item"><span>ML for Beginners</span></div>
+          <div class="cg-item"><span>Write with AI</span></div>
+          <div class="cg-item"><span>Project Planning with AI</span></div>
+          <div class="cg-item"><span>Brainstorm with AI</span></div>
+        </div>
+      </details>
+
+      <details class="cert-group card">
+        <summary>
+          <span class="cg-icon">🤝</span>
+          <span class="cg-text">
+            <strong>Vision — Workplace Training</strong>
+            <span class="cg-sub">Fackförbundet Vision · completed 2026-01-12</span>
+          </span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="cg-list">
+          <div class="cg-item"><span>Att tala och samtala — communication skills</span></div>
+          <div class="cg-item"><span>Dina rättigheter och möjligheter — workplace rights</span></div>
+        </div>
+      </details>
+    </div>
+
+    <p class="cert-note">more certifications are on the way — this list keeps growing</p>
   </div>
 </section>
 
